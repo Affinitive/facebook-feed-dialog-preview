@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+<head>
+	<title>Facebook Feed Dialog Preview Tool</title>
+	<link rel="stylesheet" href="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yR/r/sIUhoP9ASxm.css">
+	<link rel="stylesheet" href="https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/iErg0BfiRxr.css">
+	<style>
+		.container { margin: 20px auto; padding: 20px; max-width: 600px}
+		.container section { margin-bottom: 1em; }
+		.feed-header, .feed-form { margin-bottom: 1em; }
+		.feed-form label { display: block; margin-top: .5em; width: 310px; }
+		.feed-form input, .feed-form textarea { width: 310px; }
+		.attachmentText .caption { display: none; }
+		.limit-width { width: 600px; max-width: 100%; overflow: auto; }
+	</style>
+	<!-- http://codepo8.github.io/css-fork-on-github-ribbon/ -->
+	<style>#forkongithub a{background:#000;color:#fff;text-decoration:none;font-family:arial, sans-serif;text-align:center;font-weight:bold;padding:5px 40px;font-size:1rem;line-height:2rem;position:relative;transition:0.5s;}#forkongithub a:hover{background:#060;color:#fff;}#forkongithub a::before,#forkongithub a::after{content:"";width:100%;display:block;position:absolute;top:1px;left:0;height:1px;background:#fff;}#forkongithub a::after{bottom:1px;top:auto;}@media screen and (min-width:800px){#forkongithub{position:absolute;display:block;top:0;right:0;width:200px;overflow:hidden;height:200px;}#forkongithub a{width:200px;position:absolute;top:60px;right:-60px;transform:rotate(45deg);-webkit-transform:rotate(45deg);box-shadow:4px 4px 10px rgba(0,0,0,0.8);}}</style>
+
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1 class="feed-header">Facebook Feed Dialog Preview</h1>
+			<p>
+				This tool is an attempt at being able to preview how attachments to stories
+				created with the feed dialog look when posted on Facebook. Note that
+				Facebook may change their stylesheets at any time so this may be out of date.
+				We are linking directly to Facebook's stylesheets to attempt to get the most
+				accurate representation possible. The picture preview is also likely not exact.
+				We are simply using the CSS3 background-size property to have the picture fit
+				the available space.
+			</p>
+			<p>
+				The main purpose of this tool is to make it possible to tell if the
+				name, caption, and description of the link attachment will fit in Facebook's
+				current design without being truncated.
+				<a href="https://developers.facebook.com/bugs/125436114284682" target="_blank">This bug</a>
+				was filed and was determined to be working as designed. The previous functionality
+				had a "See More" link that could be clicked to expand the entire feed attachment.
+				This is no longer available and the only option is to click through to the link destination.
+			</p>
+			<p>
+				This is a completely client-side application.
+				No data is sent to backend servers.
+				This project is open source under the MIT license and
+				hosted on <a href="https://github.com/Affinitive/facebook-feed-dialog-preview" target="_blank">Github</a>.
+			</p>
+		</header>
+		<section class="preview-form">
+			<form id="feed-form" class="feed-form" data-persist="garlic">
+				<label>App ID</label>
+				<input type="text" name="feed-app-id" id="feed-app-id">
+				<br>
+				<label>Redirect URI</label>
+				<input type="text" name="feed-redirect-uri" id="feed-redirect-uri">
+				<br>
+				<label>Link</label>
+				<input type="text" name="feed-link" id="feed-link">
+				<br>
+				<label>Name</label>
+				<textarea name="feed-name" id="feed-name"></textarea>
+				<br>
+				<label>
+					Caption<br>
+					Hint: entering a space will remove the caption from the output.
+					Otherwise, the hostname of the link is displayed.
+				</label>
+				<textarea name="feed-caption" id="feed-caption"></textarea>
+				<br>
+				<label>Description</label>
+				<textarea id="feed-description" name="feed-description"></textarea>
+				<br>
+				<label>Picture URL</label>
+				<input type="text" name="feed-picture" id="feed-picture">
+			</form>
+		</section>
+		<section class="preview-news-feed"></section>
+		<section class="preview-timeline">
+			<h2>Timeline Preview</h2>
+			<div class="mvm uiStreamAttachments fbMainStreamAttachment" data-ft="{&quot;type&quot;:10,&quot;tn&quot;:&quot;H&quot;}">
+				<div>
+					<div class="shareRedesign _gxb">
+						<div class="clearfix shareRedesignContainer">
+							<a class="shareMediaLink shareRedesignMedia _8o lfloat" href="http://mlssoccer.com/mlsworks" data-ft="{&quot;type&quot;:10,&quot;tn&quot;:&quot;H&quot;}" tabindex="-1" aria-hidden="true" rel="nofollow" target="_blank"><img class="shareMediaPhoto img" src="https://fbstatic-a.akamaihd.net/rsrc.php/v2/y4/r/-PAXP-deijE.gif" alt=""></a>
+							<div class="_42ef">
+								<div class="pam shareText shareTextContainsHTML">
+									<div class="attachmentText fsm fwn fcg">
+										<a href="[ feed-link ]" target="_blank" rel="nofollow"><div class="uiAttachmentTitle" data-ft="{&quot;type&quot;:11,&quot;tn&quot;:&quot;C&quot;}"><strong>[ feed-name ]</strong></div></a>
+										<span class="caption" data-ft="{&quot;tn&quot;:&quot;L&quot;}">[ feed-caption ]</span>
+										<div class="mts uiAttachmentDesc translationEligibleUserAttachmentMessage" data-ft="{&quot;tn&quot;:&quot;M&quot;}">[ feed-description ]</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<div class="shareRedesignTopBorder"></div>
+					<div class="shareRedesignRightBorder"></div>
+					<div class="shareRedesignBottomBorder"></div>
+				</div>
+			</div>
+		</section>
+		<section class="dialog-url limit-width">
+			<h2>Dialog URL</h2>
+			<a href="" target="_blank"></a>
+		</section>
+		<section class="preview-url limit-width">
+			<h2>Link To This Preview</h2>
+			<a href=""></a>
+		</section>
+	</div>
+	<span id="forkongithub"><a href="https://github.com/Affinitive/facebook-feed-dialog-preview" target="_blank">Fork me on GitHub</a></span>
+	<script src="components/jquery/jquery.min.js"></script>
+	<script src="components/garlicjs/garlic.js"></script>
+	<script>
+		// parseUri 1.2.2
+		// (c) Steven Levithan <stevenlevithan.com>
+		// MIT License
+
+		function parseUri(str) {
+			var	o   = parseUri.options,
+				m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+				uri = {},
+				i   = 14;
+
+			while (i--) uri[o.key[i]] = m[i] || "";
+
+			uri[o.q.name] = {};
+			uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+				if ($1) uri[o.q.name][$1] = $2;
+			});
+
+			return uri;
+		};
+
+		parseUri.options = {
+			strictMode: false,
+			key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+			q:   {
+				name:   "queryKey",
+				parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+			},
+			parser: {
+				strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+				loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+			}
+		};
+
+		// Feed Dialog Preview
+		// Rob Marscher <beaffinitive.com>
+		// MIT License
+		var els = {
+			feed: {
+
+			},
+			timeline: {
+				link: $(".attachmentText a:first"),
+				name: $(".attachmentText a:first strong"),
+				caption: $(".attachmentText .caption"),
+				description: $(".uiAttachmentDesc"),
+				picture: $(".shareMediaPhoto")
+			},
+			dialogUrl: $(".dialog-url a"),
+			link: $(".preview-url a"),
+		},
+		values = {
+			app_id: null,
+			redirect_uri: null,
+			link: null,
+			name: null,
+			caption: null,
+			description: null,
+			picture: null
+		},
+		updateValues = function() {
+			var dialogUrl, link, pieces = [], property, query;
+			for (property in values) {
+				if (!values.hasOwnProperty(property)) {
+					continue;
+				}
+				if (values[property] === null || values[property] === '') {
+					continue;
+				}
+				pieces.push(
+					window.encodeURIComponent(property) + "=" +
+					window.encodeURIComponent(values[property])
+				);
+			}
+			query = pieces.join("&");
+			dialogUrl = "https://facebook.com/dialog/feed?" + query;
+			els.dialogUrl.attr("href", dialogUrl);
+			els.dialogUrl.text(dialogUrl);
+
+			link = window.location.href;
+			link = link.split("?")[0].split("#")[0] + "?" + query;
+			els.link.attr("href", link);
+			els.link.text(link);
+		},
+		events = {
+			appId: function(e) {
+				values.app_id = $(this).val();
+				updateValues();
+			},
+			redirectUri: function(e) {
+				values.redirect_uri = $(this).val();
+				updateValues();
+			},
+			link: function(e) {
+				var link = $(this).val();
+				els.timeline.link.attr("href", link);
+				values.link = link;
+				$("#feed-caption").trigger("change");
+			},
+			name: function(e) {
+				var text = trim($(this).val());
+				els.timeline.name.text(text);
+				values.name = text;
+				updateValues();
+			},
+			caption: function(e) {
+				var text = $(this).val();
+				values.caption = text;
+				if (text === '') {
+					text = parseUri($("#feed-link").val()).host;
+				}
+				text = trim(text);
+				if (text === '') {
+					els.timeline.caption.hide();
+					return;
+				}
+				els.timeline.caption.show();
+				els.timeline.caption.text(text);
+				updateValues();
+			},
+			description: function(e) {
+				var text = trim($(this).val());
+				if (text === '') {
+					// actually Facebook scrapes the description off the link in this case
+					// but that's beyond this simple tool
+					els.timeline.description.hide();
+					return;
+				}
+				els.timeline.description.show();
+				els.timeline.description.text(text);
+				values.description = text;
+				updateValues();
+			},
+			picture: function(e) {
+				var url = trim($(this).val());
+				els.timeline.picture.css({
+					"backgroundImage": "url(\"" + url + "\") ",
+					"backgroundSize": "100%",
+				})
+				values.picture = url;
+				updateValues();
+			}
+		},
+		resetFromUrl = function() {
+			var parsed = parseUri(window.location);
+			if (parsed.queryKey.app_id !== undefined) {
+				$("#feed-app-id").val(window.decodeURIComponent(parsed.queryKey.app_id));
+			}
+			if (parsed.queryKey.redirect_uri !== undefined) {
+				$("#feed-redirect-uri").val(window.decodeURIComponent(parsed.queryKey.redirect_uri));
+			}
+			if (parsed.queryKey.link !== undefined) {
+				$("#feed-link").val(window.decodeURIComponent(parsed.queryKey.link));
+			}
+			if (parsed.queryKey.name !== undefined) {
+				$("#feed-name").val(window.decodeURIComponent(parsed.queryKey.name));
+			}
+			if (parsed.queryKey.caption !== undefined) {
+				$("#feed-caption").val(window.decodeURIComponent(parsed.queryKey.caption));
+			}
+			if (parsed.queryKey.description !== undefined) {
+				$("#feed-description").val(window.decodeURIComponent(parsed.queryKey.description));
+			}
+			if (parsed.queryKey.picture !== undefined) {
+				$("#feed-picture").val(window.decodeURIComponent(parsed.queryKey.picture));
+			}
+		},
+		trim = function(str) {
+			return str.replace(/^\s+|\s+$/g, '');
+		};
+		jQuery(function($) {
+			$("#feed-app-id").on('keyup change blur', events.appId);
+			$("#feed-redirect-uri").on('keyup change blur', events.redirectUri);
+			$("#feed-link").on('keyup change blur', events.link);
+			$("#feed-name").on('keyup change blur', events.name);
+			$("#feed-caption").on('keyup change blur', events.caption);
+			$("#feed-description").on('keyup change blur', events.description);
+			$("#feed-picture").on('change blur', events.picture);
+			window.setTimeout(function() {
+				resetFromUrl();
+				$("#feed-app-id,#feed-redirect-uri,#feed-link").trigger("change");
+				$("#feed-name,#feed-description,#feed-picture").trigger("change");
+			}, 1000);
+		});
+	</script>
+</body>
+</html>
