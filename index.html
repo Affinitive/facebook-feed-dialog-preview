@@ -218,6 +218,7 @@
 			caption: function(e) {
 				var text = $(this).val();
 				values.caption = text;
+				updateValues();
 				if (text === '') {
 					text = parseUri($("#feed-link").val()).host;
 				}
@@ -228,10 +229,11 @@
 				}
 				els.timeline.caption.show();
 				els.timeline.caption.text(text);
-				updateValues();
 			},
 			description: function(e) {
 				var text = trim($(this).val());
+				values.description = text;
+				updateValues();
 				if (text === '') {
 					// actually Facebook scrapes the description off the link in this case
 					// but that's beyond this simple tool
@@ -240,8 +242,6 @@
 				}
 				els.timeline.description.show();
 				els.timeline.description.text(text);
-				values.description = text;
-				updateValues();
 			},
 			picture: function(e) {
 				var url = trim($(this).val());
